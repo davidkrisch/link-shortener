@@ -3,6 +3,8 @@
 A link shortener written as a learning tool for clojure, ring, noir,
 drift (migrations), and hsqldb
 
+This is very much a work in progress.  There is nothing functional about it, yet.
+
 ## Prerequisites
 
 1. Download hsqldb 2.2.5
@@ -22,12 +24,17 @@ drift (migrations), and hsqldb
     ```bash
     lein deps
     ```
+2. Run the tests
+
+    ```bash
+    lein test
+    ```
 2. Run the migrations
 
     ```bash
     lein migrate -version 1
     ```
-3. Download dependencies and run the server
+3. Run the server
 
     ```bash
     lein run
