@@ -16,10 +16,22 @@
         index (if (= alpha-length index) 0 index)]
     (str (.charAt alpha index))))
 
-(defn n [s]
-  (loop [f (allButLast s)
-         l (nextInAlpha (last s))
+(defn incrementCount [count]
+  (loop [f (allButLast count)
+         l (nextInAlpha (last count))
          acc ""]
     (if (not= l "0")
       (str f l acc)
       (recur (allButLast f) (nextInAlpha (last f)) (str l acc)))))
+
+(def
+  ^{:doc "Ref to store the next value of the sequence"
+    :private true} 
+  curVal (ref "0"))
+
+(defn get-shortened-link []
+  (dosync []
+    (let [to-return (str @curVal)]
+      (alter curVal incrementCount)
+      to-return)))
+

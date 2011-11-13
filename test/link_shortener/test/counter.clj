@@ -15,8 +15,8 @@
   (is (= (allButLast "") "") "This shouldn't return anything.")) 
 
 (deftest test_multichar
-  (is (= (n "ab") "ac") "Why didn't it return ac?")
-  (is (= (n "Z") "10") "Why didn't it return 10?")
-  (is (= (n "ZZ") "100") "Why didn't it return 100?")
-  (is (= (n "zZ") "A0") "Why didn't it return A0?")
-  (is (= (n "asdfZZ") "asdg00") "Why didn't it return asdg00?"))
+  (is (= (incrementCount "ab") "ac") "Why didn't it return ac?")
+  (is (= (incrementCount "Z") "10") "Why didn't it return 10?")
+  (is (= (incrementCount "ZZ") "100") "Why didn't it return 100?")
+  (is (= (incrementCount "zZ") "A0") "Why didn't it return A0?")
+  (is (= (incrementCount "asdfZZ") "asdg00") "Why didn't it return asdg00?"))

@@ -4,7 +4,8 @@
                            [noir "1.0.0"]
                            [org.hsqldb/hsqldb "2.2.4"]
                            [korma "0.2.1"]
-                           [commons-validator/commons-validator "1.3.1"]]
+                           [commons-validator/commons-validator "1.3.1"]
+                           [oro/oro "2.0.8"]]
             :dev-dependencies [[drift "1.2.3"]]
             :main link-shortener.server)
 
