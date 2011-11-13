@@ -1,9 +1,20 @@
 (ns link-shortener.db
-  (:use [korma db core]))
+  (:use [korma db core]
+        [link-shortener.config :only (dbconfig)]))
 
-(def db {:classname "org.hsqldb.jdbc.JDBCDriver"
-         :subprotocol "hsqldb"
-         :subname "hsql://localhost:9001/xdb"
-         :create false})
+(defdb hsql dbconfig)
 
-(defdb hsql db)
+(defentity links
+  (table :links)
+  (entity-fields :suffix :link)
+  (database hsql))
+
+(defn add-link [suffix link]
+  (insert links
+    (values {:suffix suffix :link link})))
+
+(defn get-link [suffix]
+  (:LINK (last 
+    (select links 
+      (where {:suffix suffix})
+      (fields :link)))))

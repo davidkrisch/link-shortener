@@ -1,6 +1,6 @@
 (ns migrations.001-schema-migrations
-  (:use [clojure.contrib.sql :as sql])
-  (:use [link-shortener.db :only (db)]))
+  (:use [clojure.contrib.sql :as sql]
+        [link-shortener.config :only (dbconfig)]))
 
 (defn 
  ^{:doc "Create the schema_migrations table"}
@@ -19,11 +19,11 @@
 (defn
  ^{:doc "Migrates the database up to version 1."}
   up []
-  (sql/with-connection db
+  (sql/with-connection dbconfig
         (sql/transaction (create-migrations-table))))
   
 (defn
  ^{:doc "Migrates the database down from version 1."}
   down []
-  (sql/with-connection db
+  (sql/with-connection dbconfig
         (sql/transaction (drop-migrations-table))))
