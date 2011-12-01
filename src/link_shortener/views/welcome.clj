@@ -5,7 +5,7 @@
        hiccup.page-helpers
        hiccup.form-helpers)
   (:use [link-shortener.counter :only (get-shortened-link)])
-  (:use [link-shortener.db])
+  (:use [link-shortener.db :as db])
   (:use [link-shortener.config])
   (:require [link-shortener.views.common :as common]
             [noir.response :as resp]))
@@ -28,10 +28,10 @@
   (if (.isValid validator link)
     (let [suffix (get-shortened-link)
           short (str shortened-prefix suffix)]
-      (add-link suffix link)
+      (db/add-link suffix link)
       (resp/json {:longlink link 
                   :shortlink short}))
     (resp/json {:result "invalid link"})))
 
 (defpage [:get "/:suffix"] {:keys [suffix]}
-  (resp/redirect (get-link suffix)))
+  (resp/redirect (db/get-link suffix)))

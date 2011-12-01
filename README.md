@@ -19,6 +19,13 @@ This is very much a work in progress.  There is nothing functional about it, yet
     java -cp ../hsqldb/lib/hsqldb.jar org.hsqldb.server.Server \
          --database.0 file:mydb --dbname.0 xdb
     ```
+2. Run Zookeeper
+
+    Create the config file conf/zoo.cfg by copying conf/zoo_sample.cfg.
+
+    ````bash
+    ./bin/zkServer.sh start
+    ````
 2. Download dependencies
 
     ```bash

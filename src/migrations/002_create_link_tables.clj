@@ -1,5 +1,5 @@
 (ns migrations.002-create-link-tables
-  (:use [clojure.contrib.sql :as sql]
+  (:use [clojure.java.jdbc :as sql]
         [link-shortener.config :only (dbconfig)]))
 
 (defn- create-links-table []

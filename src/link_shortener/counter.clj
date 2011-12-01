@@ -1,4 +1,10 @@
-(ns link-shortener.counter)
+(ns link-shortener.counter
+  (:use avout.core
+        [link-shortener.config :as config]))
+
+;; Initialize avout. Not sure what this does, but the docs say 
+;; it needs to be done
+(init-stm config/zkclient)
 
 (def 
   ^{:private true}
@@ -25,13 +31,12 @@
       (recur (allButLast f) (nextInAlpha (last f)) (str l acc)))))
 
 (def
-  ^{:doc "Ref to store the next value of the sequence"
+  ^{:doc "Distributed atom to store the next value of the sequence"
     :private true} 
-  curVal (ref "0"))
+  nextVal (zk-atom config/zkclient "/nextlink"))
 
 (defn get-shortened-link []
-  (dosync []
-    (let [to-return (str @curVal)]
-      (alter curVal incrementCount)
-      to-return)))
+  (let [result (str @nextVal)]
+    (swap!! nextVal incrementCount)
+    result))
 
